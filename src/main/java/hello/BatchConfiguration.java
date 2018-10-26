@@ -29,6 +29,10 @@ public class BatchConfiguration {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
+    /** Читает из из файла данные
+     *
+     * @return
+     */
     // tag::readerwriterprocessor[]
     @Bean
     public FlatFileItemReader<Person> reader() {
@@ -48,6 +52,11 @@ public class BatchConfiguration {
         return new PersonItemProcessor();
     }
 
+    /** Пишет данные в базу данных
+     *
+     * @param dataSource
+     * @return
+     */
     @Bean
     public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Person>()
@@ -56,6 +65,13 @@ public class BatchConfiguration {
                 .dataSource(dataSource)
                 .build();
     }
+
+    /** Метод определяет задание для процесса
+     *
+     * @param listener
+     * @param step1
+     * @return
+     */
     // end::readerwriterprocessor[]
 
     // tag::jobstep[]
@@ -69,6 +85,11 @@ public class BatchConfiguration {
                 .build();
     }
 
+    /** Метод задает один шаг для процесса
+     *
+     * @param writer
+     * @return
+     */
     @Bean
     public Step step1(JdbcBatchItemWriter<Person> writer) {
         return stepBuilderFactory.get("step1")

@@ -5,6 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.batch.item.ItemProcessor;
 
+/**создадим реализацию интерфейса ItemProcessor, которая будет использоваться
+ * для преобразования в верхний регистр имени и фамилии каждого лица,
+ * представленного объектом Person
+  */
+
 public class PersonItemProcessor implements ItemProcessor<Person, Person> {
 
     private static final Logger log = LoggerFactory.getLogger(PersonItemProcessor.class);

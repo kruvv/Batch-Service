@@ -1,5 +1,9 @@
 package hello;
 
+
+/** Создаем обьект предметной области, который представляет лицо
+ * основываясь на данных из читаемого файла "sample-data.csv"
+ */
 public class Person {
 
     private String lastName;

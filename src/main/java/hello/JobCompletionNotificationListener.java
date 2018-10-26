@@ -9,6 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+
+/**создадим реализацию JobCompletionNotificationListener, которая находится на уровне шагов
+ * и сообщает, сколько записей было сохранено после завершения шага
+ *
+ */
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 
@@ -21,6 +26,11 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /** Этот код проверяет, когда задание BatchStatus.COMPLETED,
+     * а затем использует JdbcTemplate для проверки результатов.
+     *
+     * @param jobExecution
+     */
     @Override
     public void afterJob(JobExecution jobExecution) {
         if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
